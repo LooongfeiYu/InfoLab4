@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -52,7 +53,6 @@ public class createPanel extends javax.swing.JPanel {
 
         titleLabel = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
-        employeeIDLabel = new javax.swing.JLabel();
         ageLabel = new javax.swing.JLabel();
         genderLabel = new javax.swing.JLabel();
         startDateLabel = new javax.swing.JLabel();
@@ -62,7 +62,6 @@ public class createPanel extends javax.swing.JPanel {
         photoLabel = new javax.swing.JLabel();
         photoPathLabel = new javax.swing.JLabel();
         nameField = new javax.swing.JTextField();
-        employeeIDField = new javax.swing.JTextField();
         ageField = new javax.swing.JTextField();
         genderField = new javax.swing.JTextField();
         startDateField = new javax.swing.JTextField();
@@ -77,8 +76,6 @@ public class createPanel extends javax.swing.JPanel {
         titleLabel.setText("Enter User Details");
 
         nameLabel.setText("Name:");
-
-        employeeIDLabel.setText("Employee ID:");
 
         ageLabel.setText("Age:");
 
@@ -123,26 +120,23 @@ public class createPanel extends javax.swing.JPanel {
                             .addComponent(nameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(genderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(ageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(startDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(startDateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                             .addComponent(levelLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(emailAddressLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(photoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(phoneNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(employeeIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(phoneNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(photoPathLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(phoneNumberField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(levelField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(genderField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(ageField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(employeeIDField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(nameField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(saveButton, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(startDateField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(emailAddressField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
-                                .addComponent(browseButton, javax.swing.GroupLayout.Alignment.LEADING)))))
+                            .addComponent(phoneNumberField)
+                            .addComponent(levelField)
+                            .addComponent(genderField)
+                            .addComponent(ageField)
+                            .addComponent(nameField)
+                            .addComponent(saveButton)
+                            .addComponent(startDateField)
+                            .addComponent(emailAddressField, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+                            .addComponent(browseButton))))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -154,10 +148,6 @@ public class createPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(nameField)
                     .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(employeeIDLabel)
-                    .addComponent(employeeIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ageLabel)
@@ -188,22 +178,29 @@ public class createPanel extends javax.swing.JPanel {
                     .addComponent(photoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(photoPathLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(saveButton)
-                .addGap(89, 89, 89))
+                .addGap(117, 117, 117))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    Random rnd = new Random();
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
         User newUser = new User();
+        int rndnum = rnd.nextInt(1, 10000);
+        for(User u: users.getAllUsers()){
+            while(u.getEmployeeID() == rndnum){
+                rndnum = rnd.nextInt(1, 10000);
+            }
+        }
+        newUser.setEmployeeID(rndnum);
         try{
-            newUser.setEmployeeID(Integer.parseInt(employeeIDField.getText()));
-            newUser.setPhoneNumber(Long.parseLong(ageField.getText()));
+            newUser.setPhoneNumber(Long.parseLong(phoneNumberField.getText()));
             newUser.setAge(Integer.parseInt(ageField.getText()));
         }catch(NumberFormatException nfe){
             JOptionPane.showMessageDialog(this, 
-                    "Phone number, age, and employee ID should be in numbers only!", "Invalid Input", HEIGHT);
+                    "Phone number and age should be in numbers only!", "Invalid Input", HEIGHT);
         }
         newUser.setName(nameField.getText());
         newUser.setGender(genderField.getText());
@@ -243,8 +240,6 @@ public class createPanel extends javax.swing.JPanel {
     private javax.swing.JButton browseButton;
     private javax.swing.JTextField emailAddressField;
     private javax.swing.JLabel emailAddressLabel;
-    private javax.swing.JTextField employeeIDField;
-    private javax.swing.JLabel employeeIDLabel;
     private javax.swing.JTextField genderField;
     private javax.swing.JLabel genderLabel;
     private javax.swing.JTextField levelField;
